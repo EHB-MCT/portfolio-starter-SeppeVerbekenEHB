@@ -38,7 +38,6 @@ app.get('/books', async (req, res) => {
       res.status(500).json({ error: 'Internal Server Error' });
     }
   });
-  
 
 app.get('/', (request, response) => {
     response.send('Hello World');
