@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npx knex migrate:latest && nodemon src/index.js --legacy-watch",
     "tdd": "npx knex migrate:latest && npm run test",
-    "test": "jest --detectOpenHandles --watchAll"
+    "test": "jest --detectOpenHandles --watchAll",
+    "citest": "npx knex migrate:latest &&  jest --detectOpenHandles --forceExit"
   },
   "author": "",
   "license": "ISC",
