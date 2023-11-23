@@ -26,4 +26,75 @@ function initEndPoints(app, db){
             res.status(400).json({ error: 'Bad Request' });
         }
     });
+
+     // Define a route to update a book by ID
+  app.put('/books/:id', async (req, res) => {
+    const bookId = req.params.id;
+    const updatedBook = req.body;
+
+    //check updatedBook
+    if(updatedBook.title.checkString() && updatedBook.author.checkString() && updatedBook.year.checkString()) {
+        try {
+            // Check if the book with the given ID exists
+            const existingBook = await db('books').where('id', bookId).first();
+
+            if (!existingBook) {
+            return res.status(404).json({ error: 'Book not found' });
+            }
+
+            // Update the book
+            await db('books').where('id', bookId).update(updatedBook);
+
+            // Fetch and return the updated book
+            const updatedBookData = await db('books').where('id', bookId).first();
+            res.json(updatedBookData);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    } else {
+        res.status(400).json({ error: 'Bad Request' });
+    }
+  });
+
+  // Define a route to delete a book by ID
+  app.delete('/books/:id', async (req, res) => {
+    const bookId = req.params.id;
+
+    try {
+      // Check if the book with the given ID exists
+      const existingBook = await db('books').where('id', bookId).first();
+
+      if (!existingBook) {
+        return res.status(404).json({ error: 'Book not found' });
+      }
+
+      // Delete the book
+      await db('books').where('id', bookId).del();
+
+      res.json({ message: 'Book deleted successfully' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+  // Define a route to find a book by ID
+  app.get('/books/:id', async (req, res) => {
+    const bookId = req.params.id;
+
+    try {
+      // Fetch the book with the given ID
+      const book = await db('books').where('id', bookId).first();
+
+      if (!book) {
+        return res.status(404).json({ error: 'Book not found' });
+      }
+
+      res.json(book);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 }
