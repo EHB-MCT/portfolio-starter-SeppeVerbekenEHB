@@ -1,13 +1,9 @@
-version: "3.2"
-
 services:
   api:
     build: ./images/api
     ports:
-      - 80:3000
-    volumes:
-      - ./images/api/src:/usr/app/src
-    environment:
+      - 8080:3000
+    environment: 
       PG_CONNECTION_STRING: "postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}"
     depends_on:
       db:
@@ -15,20 +11,17 @@ services:
     command: ["npm", "run", "start"]
 
   db:
-    image: postgres:latest
     ports:
       - 5432:5432
-    environment:
-      POSTGRES_USER:
-      POSTGRES_PASSWORD:
-      POSTGRES_DB:
-      POSTGRES_HOST_AUTH_METHOD:
-    volumes:
-      - ./_backup:/var/lib/postgresql/data
+    image: postgres:16.0
+    environment: 
+      POSTGRES_PASSWORD: 
+      POSTGRES_USER: 
+      POSTGRES_DB: 
+      POSTGRES_HOST_AUTH_METHOD: 
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB "]
       interval: 5s
       timeout: 5s
       retries: 10
-
   
