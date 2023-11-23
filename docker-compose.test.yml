@@ -1,6 +1,6 @@
 services:
   api:
-    image: crshlab/cicdgroepa2023:latest
+    build: ./images/api
     ports:
       - 8080:3000
     environment: 
@@ -11,7 +11,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    command: ["npm", "run", "citest"]
+    command: ["npm", "run", "testexit"]
 
   db:
     ports:
@@ -22,17 +22,15 @@ services:
       POSTGRES_USER: 
       POSTGRES_DB: 
       POSTGRES_HOST_AUTH_METHOD: 
-    volumes:
-      - ./_volumes/store:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB "]
       interval: 5s
       timeout: 5s
       retries: 10
 
-  watchtower:
-    image: containrrr/watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 30
+  # watchtower:
+  #   image: containrrr/watchtower
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   command: --interval 30
   
