@@ -7,7 +7,8 @@
     "start": "npx knex migrate:latest && nodemon src/index.js --legacy-watch",
     "tdd": "npx knex migrate:latest && npm run test",
     "test": "jest --detectOpenHandles --watchAll",
-    "testexit": "npx knex migrate:latest &&  jest --detectOpenHandles --forceExit"
+    "testexit": "npx knex migrate:latest &&  jest --detectOpenHandles --forceExit",
+    "migrate": "npx knex migrate:latest --cwd src/db && npx knex seed:run --cwd src/db"
   },
   "author": "",
   "license": "ISC",
