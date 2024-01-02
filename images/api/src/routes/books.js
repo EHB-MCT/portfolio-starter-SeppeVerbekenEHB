@@ -17,7 +17,7 @@ app.get('/books', async (req, res) => {
 });
 
 // Define a route to add a new book
-app.post('/books', async (req, res) => {
+app.post('/', async (req, res) => {
   const book = req.body;
   if (book.title.checkString() && book.author.checkString() && book.year.checkString()) {
     try {
@@ -123,3 +123,5 @@ app.get('/books/:id', async (req, res) => {
     });
   }
 });
+
+module.exports = app;
