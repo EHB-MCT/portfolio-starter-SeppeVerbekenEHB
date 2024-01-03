@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 
-// Define a route to get all books
+// Get all books
 app.get('/books', async (req, res) => {
   try {
     const books = await db('books').select('*');
@@ -16,7 +16,7 @@ app.get('/books', async (req, res) => {
   }
 });
 
-// Define a route to add a new book
+// Add a new book
 app.post('/', async (req, res) => {
   const book = req.body;
   if (book.title.checkString() && book.author.checkString() && book.year.checkString()) {
@@ -37,7 +37,7 @@ app.post('/', async (req, res) => {
   }
 });
 
-// Define a route to update a book by ID
+// Update a book by ID
 app.put('/books/:id', async (req, res) => {
   const bookId = req.params.id;
   const updatedBook = req.body;
@@ -73,7 +73,7 @@ app.put('/books/:id', async (req, res) => {
   }
 });
 
-// Define a route to delete a book by ID
+// Delete a book by ID
 app.delete('/books/:id', async (req, res) => {
   const bookId = req.params.id;
 
@@ -101,7 +101,7 @@ app.delete('/books/:id', async (req, res) => {
   }
 });
 
-// Define a route to find a book by ID
+// Find a book by ID
 app.get('/books/:id', async (req, res) => {
   const bookId = req.params.id;
 

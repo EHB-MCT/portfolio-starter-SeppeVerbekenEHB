@@ -22,6 +22,9 @@ app.use(express.json());
 const booksRoutes = require('./routes/books.js');
 app.use('/books', booksRoutes);
 
+const librariesRoutes = require('./routes/libraries.js');
+app.use('/libraries', librariesRoutes);
+
 // Default route
 app.get('/', (request, response) => {
     response.send('Hello World test');

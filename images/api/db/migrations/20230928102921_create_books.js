@@ -8,6 +8,7 @@ exports.up = function (knex) {
         table.string('title').notNullable();
         table.string('author').notNullable();
         table.integer('year').notNullable();
+        table.integer('library_id').unsigned().notNullable();
     }).then(() => {
         console.log("migrated up")
     });
