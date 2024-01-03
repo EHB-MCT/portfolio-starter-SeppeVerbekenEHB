@@ -4,7 +4,6 @@ const cors = require('cors');
 const knex = require('knex');
 
 const app = express();
-const port = 3000;
 
 // Knex.js configuration
 const knexConfig = require('../knexfile'); // Assuming knexfile.js is in the same directory
@@ -17,11 +16,16 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(bodyParser.json());
+app.use(express.json());
 
 // Routes
 const booksRoutes = require('./routes/books.js');
 app.use('/books', booksRoutes);
 
+const librariesRoutes = require('./routes/libraries.js');
+app.use('/libraries', librariesRoutes);
+
+// Default route
 app.get('/', (request, response) => {
     response.send('Hello World test');
 });
