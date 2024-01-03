@@ -1,7 +1,7 @@
 name: Test On Push
 on:
   push:
-    branches: [ main, feat/CICDSetup ] 
+    branches: [  feat/CICDSetup ] 
 
 env: 
   POSTGRES_USER: test
