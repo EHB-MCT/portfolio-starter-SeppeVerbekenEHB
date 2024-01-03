@@ -1,7 +1,7 @@
 name: Test On Push
 on:
   push:
-    branches: [ main, feat/]
+    branches: [ feat/]
 
 env: 
   POSTGRES_USER: test
