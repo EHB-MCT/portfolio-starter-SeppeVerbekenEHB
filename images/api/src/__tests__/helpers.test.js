@@ -1,7 +1,9 @@
-const { checkString } = require('./../helpers/helper.js');
+const {
+    checkString
+} = require('./../helpers/helper.js');
 
 //write a test for the helper function
-test ("check string", () => {
+test("check string", () => {
     expect(checkString("hello")).toBe(true);
     expect(checkString("Seppe Verbeken")).toBe(true);
 
